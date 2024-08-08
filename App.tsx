@@ -1,57 +1,70 @@
-// // Example - 1
+// Example - 1
+// // Fixed Dimensions - Using fixed height and fixed width in style is the simplest way to set the dimension of the component. The dimensions of React Native component are unit-less and they represent density-independent pixels.Setting the dimension of component with fixed size is common and exactly the same size, regardless of screen dimensions.
+
 // import React, { Component } from 'react';  
-// import { StyleSheet, Text, View } from 'react-native';  
+// import { StyleSheet, View } from 'react-native';  
   
-// export default class ImplementingStyle extends Component {  
+// export default class HeightWidth extends Component {  
 //     render() {  
 //         return (  
-//             <View>  
-//               {/* All the core components use a prop (property) named style. The style names and values are similar to CSS that works for the web. There is the only difference in the way of writing names using camel casing, e.g fontSize rather than font-size. The style prop is a plain old JavaScript object which is the simplest way for styling our code. There are different ways to design our component, by using inline style and by using StyleSheet.create */}
-
-//                 <Text style={{ backgroundColor: '#a7a6a9', color: 'yellow', fontSize: 20 }}>this is inline style</Text>  
-//                 <Text style={styles.green}>just green</Text>  
-//                 <Text style={styles.biggray}>just biggray</Text>  
-//                 <Text style={[styles.biggray, styles.green]}>biggray, then green</Text>  
-//                 <Text style={[styles.green, styles.biggray]}>green, then biggray</Text>  
-
-//               {/* Note :- If we are giving more than one CSS styling then the CSS style which is given at end will we adpotted. */}
-
+//             <View style={{margin:10, backgroundColor:'white'}}>  
+//                 <View style={styles.powderblue} />  
+//                 <View style={styles.skyblue} />  
+//                 <View style={styles.steelblue} />  
 //             </View>  
 //         );  
 //     }  
 // }  
 // const styles = StyleSheet.create({  
-//     biggray: {  
-//         color: 'gray',  
-//         fontWeight: 'bold',  
-//         fontSize: 30,  
+//     powderblue:{  
+//         width: 100, height: 100, backgroundColor: 'powderblue'  
 //     },  
-//     green: {  
-//         color: 'green',  
+//     skyblue:{  
+//         width: 200, height: 200, backgroundColor: 'skyblue'  
 //     },  
-// });  
+//     steelblue:{  
+//         height: 300, backgroundColor: 'steelblue'  
+//     },  
+// })  
 
-// Example - 2 --> 
 
-import React from 'react';  
-import { View } from 'react-native';  
-import StyleComponent from './Style/StyleComponent'  
+// Example - 2 
+// Flex Dimensions - The flex property styles the component to expand and shrink it dynamically according to available space. Setting flex: 1 will fill all the available space to the component and shared evenly among the other components of same as the parent. Higher the flex value, occupy component higher ratio of space compared to its siblings.
+
+import React, { Component } from 'react';  
+import { StyleSheet, View } from 'react-native';  
   
-export default class App extends React.Component {  
-    state = {  
-        myState: 'This is my state, style through external style'  
-    }  
+export default class HeightWidth extends Component {  
     render() {  
         return (  
-            <View>  
-
-              {/* One of the way to pass String props */}
-              {/* <StyleComponent myTextProp = 'This is my state, style through external style' />   */}
-
-              {/* This is also another way to pass props */}
-              <StyleComponent myTextProp = {this.state.myState} />
-
+            <View style={styles.container}>  
+                <View style={styles.powderblue} />  
+                <View style={styles.skyblue} />  
+                <View style={styles.steelblue} />  
             </View>  
         );  
     }  
 }  
+const styles = StyleSheet.create({  
+    container:{  
+      flex:1,
+      margin:15,
+      borderColor:'red',
+      borderWidth:2,  
+    },  
+    powderblue:{  
+        flex:1,  
+        backgroundColor: 'powderblue',  
+    },  
+    skyblue:{  
+        flex:2,  
+        backgroundColor: 'skyblue',  
+    },  
+    steelblue:{  
+        flex:3,  
+        backgroundColor: 'steelblue',  
+    },  
+}) 
+
+
+
