@@ -1,141 +1,168 @@
-// Flexbox --> React Native Flexbox is an algorithm to specify the layout of component's children. It provides a consistent layout on different screen sizes. Flexbox provides three main properties to achieve the desired layout. These properties are: flexDirection, justifyContent and alignItems.
-
-// flexDirection - The flexDirection adds the style to the component in a primary axis of its layout. It has a property row and column to organize children horizontally and vertically respectively. The default flexDirection is a column.
+// Flexbox Positioning -->
 
 // // Example - 1
-
-// import React, { Component } from 'react';  
-// import { StyleSheet,View } from 'react-native';  
+// import React, { Component } from "react";  
+// import { StyleSheet, TextInput, View , Button, Alert } from "react-native";  
   
-// export default class FlexDirectionBasics extends Component {  
+// export default class App extends Component {  
+
+//     state = {  
+//         placeName: "",  
+//     };  
+  
+//     placeNameChangedHandler = (val: any) => {  
+//         this.setState({  
+//             placeName: val  
+//         });  
+//     };  
+  
+//     placeSubmitHandler = () => {  
+//         Alert.alert("button clicked")  ;
+//     };  
+  
 //     render() {  
 //         return (  
 //             <View style={styles.container}>  
-//                 <View style={styles.powderblue} />  
-//                 <View style={styles.skyblue} />  
-//                 <View style={styles.steelblue} />  
+//                 <TextInput  
+//                         placeholder="An awesome place"  
+//                         onChangeText={this.placeNameChangedHandler}  
+//                 />  
+//                 <Button  
+//                         title="Button"  
+//                         onPress={this.placeSubmitHandler}  
+//                 />  
 //             </View>  
 //         );  
 //     }  
 // }  
+  
 // const styles = StyleSheet.create({  
-//     container:{  
+//     container: {  
 //         flex: 1,  
-//         flexDirection: 'row',// set elements horizontally, try column.  
-//     },
-
-//     powderblue:{  
-//         width: 60,  
-//         height: 60,  
-//         backgroundColor: 'powderblue',  
-//     },  
-
-//     skyblue:{  
-//         width: 60,  
-//         height: 60,  
-//         backgroundColor: 'skyblue',  
-//     }, 
-
-//     steelblue:{  
-//         width: 60,  
-//         height: 60,  
-//         backgroundColor: 'steelblue',  
+//         padding: 26,  
+//         justifyContent: "flex-start"  
 //     }  
-// })  
+// });  
 
 // ============================================================== //
 
-// justifyContent - The justifyContent determines the distribution of children component along the primary axis. The children component are distributed at the start, end, center or space evenly.
 
 // // Example - 2
-
-// import React, { Component } from 'react';  
-// import { StyleSheet,View } from 'react-native';  
+// import React, { Component } from "react";  
+// import { StyleSheet, View, TextInput, Button, Alert } from "react-native";  
   
-// export default class JustifyContentBasics extends Component {  
+// export default class App extends Component {  
+//     state = {  
+//         placeName: "",  
+//     };  
+  
+//     placeNameChangedHandler = (val: any) => {  
+//         this.setState({  
+//             placeName: val  
+//         });  
+//     };  
+  
+//     placeSubmitHandler = () => {  
+//         Alert.alert("button clicked")  
+//     };  
+  
 //     render() {  
 //         return (  
 //             <View style={styles.container}>  
-//                 <View style={styles.powderblue} />  
-//                 <View style={styles.skyblue} />  
-//                 <View style={styles.steelblue} />  
+//                 <View style={styles.innerContainer}>  
+//                     <TextInput  
+//                             placeholder="An awesome place"  
+//                             onChangeText={this.placeNameChangedHandler}  
+//                     />  
+//                     <Button  
+//                             title="Button"  
+//                             onPress={this.placeSubmitHandler}  
+//                     />  
+//                 </View>  
 //             </View>  
 //         );  
 //     }  
 // }  
+  
 // const styles = StyleSheet.create({  
-//     container:{  
+//     container: {  
 //         flex: 1,  
-//         flexDirection: 'column', // set elements horizontally`.  
-//         justifyContent: 'center',  
+//         padding: 26,  
+//         justifyContent: "flex-start"  
 //     },  
-
-//     powderblue:{  
-//         width: 60,  
-//         height: 60,  
-//         backgroundColor: 'powderblue'  
-//     }, 
-
-//     skyblue:{  
-//         width: 60,  
-//         height: 60,  
-//         backgroundColor: 'skyblue',  
-//     }, 
-
-//     steelblue:{  
-//         width: 60,  
-//         height: 60,  
-//         backgroundColor: 'steelblue',  
+    
+//     innerContainer:{  
+//         flex: 1,  
+//         flexDirection: "row"  
 //     }  
-// })  
+// });  
+
+// // Note :- The flex: 1 for inner View occupy full space which does not look good as the TextInput and Button occupy all space from top to bottom.
+
 
 // ============================================================== //
 
-// alignItems - The alignItems determine the alignment of children component along the secondary axis. If the primary axis is a column then the secondary is a row and when a primary axis is a ro, then the secondary is a column. Using the alignItems, the children are aligned at start, end, center or stretched.
-// Note: The stretch does not work if the children have a fixed dimension along the secondary axis. In above example, the alignItems: stretch will not work until we remove width: 50.
 
 // Example - 3
 
-import React, { Component } from 'react';  
-import { StyleSheet,View } from 'react-native';  
+import React, { Component } from "react";  
+import { StyleSheet, View, TextInput, Button, Alert } from "react-native";  
   
-export default class AlignItemsBasics extends Component {  
+export default class App extends Component {  
+    state = {  
+        placeName: "",    
+    };  
+  
+    placeNameChangedHandler = (val : any) => {  
+        this.setState({  
+            placeName: val  
+        });  
+    };  
+  
+    placeSubmitHandler = () => {  
+        Alert.alert("button clicked")  
+    };  
+  
     render() {  
         return (  
             <View style={styles.container}>  
-                <View style={styles.powderblue} />  
-                <View style={styles.skyblue} />  
-                <View style={styles.steelblue} />  
+                <View style={styles.innerContainer}>  
+                    <TextInput  
+                            placeholder="An awesome place"  
+                            onChangeText={this.placeNameChangedHandler}  
+                            style={styles.textStyle}  
+                    />  
+                    <Button  
+                            title="Button"  
+                            onPress={this.placeSubmitHandler}  
+                    />  
+                </View>  
             </View>  
         );  
     }  
 }  
+  
 const styles = StyleSheet.create({  
-    container:{  
+    container: {  
         flex: 1,  
-        flexDirection: 'column', // set elements horizontally`.  
-        justifyContent: 'center',  
-        alignItems: 'stretch',  
+        padding: 26,  
+        backgroundColor: "#fff",  
+        justifyContent: "flex-start"  
     },  
-
-    powderblue:{  
-        width: 60,  
-        height: 60,  
-        backgroundColor: 'powderblue'  
-    }, 
-
-    skyblue:{  
-        width: 60,  
-        height: 60,  
-        backgroundColor: 'skyblue',  
+    innerContainer:{   
+        flexDirection: "row",  
+        justifyContent: "space-between",  
+        alignItems: "center"  
     },  
-
-    steelblue:{  
-        // width: 60, 
-        height: 60,  
-        backgroundColor: 'steelblue',  
+    textStyle:{  
+        width: "70%",  
+        backgroundColor: "gray",  
+    },  
+    buttonStyle:{  
+        width: "30%",  
     }  
-})  
+});  
+
 
 // ============================================================== //
 
