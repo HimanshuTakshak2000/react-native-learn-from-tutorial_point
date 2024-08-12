@@ -1,141 +1,122 @@
-// ScrollView --> The ScrollView is a generic scrollable container, which scrolls multiple child components and views inside it. In the ScrollView, we can scroll the components in both direction vertically and horizontally. By default, the ScrollView container scrolls its components and views in vertical. To scroll its components in horizontal, it uses the props horizontal: true (default, horizontal: false).
+// FlatList --> The FlatList component displays the similar structured data in a scrollable list. It works well for large lists of data where the number of list items might change over time. The FlatList shows only those renders elements which are currently displaying on the screen, not all the elements of the list at once. The FlatList component takes two required props: data and renderItem. The data is the source of elements for the list and renderItem takes one item from the source and returns a formatted component to render. To implement the FlatList component. We need to import FlatList from 'react-native' library.
 
 
-// // Example - 1
-// // Vertical Scroll View
-
-// import React, { Component } from 'react';  
-// import { ScrollView, Text, Button, Alert } from 'react-native';  
+// Example - 1
+import React, { Component } from 'react';  
+import { FlatList, StyleSheet, Text, View,Alert } from 'react-native';  
   
-// export default class ScrolledViewExample extends Component {  
-//     onPressButton() {  
-//         Alert.alert('You clicked the button!')  
-//     }  
+export default class App extends Component {  
   
-//     render() {  
-//         return (  
-//             <ScrollView style={{padding:15}}>  
-//                 <Text style={{fontSize:20}}>Scroll me plz</Text>  
-//                 <Button title={'Button 1'} onPress={this.onPressButton} />  
-//                 <Text style={{fontSize:20}}>React Native Example of ScrollView</Text>  
-//                 <Button title={'Button 2'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>React Native ScrollView Example</Text>  
-//                 <Button title={'Button 3'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>If you like</Text>  
-//                 <Button title={'Button 4'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>Scrolling down</Text>  
-//                 <Button title={'Button 5'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>Scrolling down</Text>  
-//                 <Button title={'Button 6'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>What's the best</Text>  
-//                 <Button title={'Button 7'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>What's the best</Text>  
-//                 <Button title={'Button 8'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>Framework around?</Text>  
-//                 <Button title={'Button 9'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>Framework around?</Text>  
-//                 <Button title={'Button 10'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>React Native</Text>  
-//                 <Button title={'Button 11'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>Scroll me plz</Text>  
-//                 <Button title={'Button 12'} onPress={this.onPressButton} />  
-//                 <Text style={{fontSize:20}}>Scroll me plz</Text>  
-//                 <Button title={'Button 13'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>If you like</Text>  
-//                 <Button title={'Button 14'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>If you like</Text>  
-//                 <Button title={'Button 15'} onPress={this.onPressButton}/>  
-//                 <Text style={{fontSize:20}}>Scrolling down</Text>  
-//                 <Button title={'Button 16'} onPress={this.onPressButton}/>  
-//             </ScrollView>  
-//         );  
-//     }  
-// }  
+    renderSeparator = () => {  
+        return (  
+            <View  
+                style={{  
+                    height: 1,  
+                    width: "100%",  
+                    backgroundColor: "#000",  
+                }}  
+            />  
+        );  
+    };  
+
+    //handling onPress action  
+    getListViewItem = (item: { key: string; }) => {  
+        Alert.alert(item.key);  
+    }  
+  
+    render() {  
+        return (  
+            <View style={styles.container}>  
+                <FlatList 
+
+                    data={[  
+                        {
+                            key: 'Android'
+                        },
+
+                        {
+                            key: 'iOS'
+                        },
+
+                        {
+                            key: 'Java'
+                        },
+
+                        {
+                            key: 'Swift'
+                        },
+
+                        {
+                            key: 'Php'
+                        },
+
+                        {
+                            key: 'Hadoop'
+                        },
+
+                        {
+                            key: 'Sap'
+                        }, 
+
+                        {
+                            key: 'Python'
+                        },
+
+                        {
+                            key: 'Ajax'
+                        }, 
+                        
+                        {
+                            key: 'C++'
+                        },
+
+                        {
+                            key: 'Ruby'
+                        },
+
+                        {
+                            key: 'Rails'
+                        },
+
+                        {
+                            key: '.Net'
+                        },
+                          
+                        {
+                            key: 'Perl'
+                        } 
+                    ]}  
+
+                    renderItem={({item}) =>  
+                        <Text style={styles.item} onPress={this.getListViewItem.bind(this, item)}> {item.key} </Text>
+                    }  
+
+                    ItemSeparatorComponent={this.renderSeparator}  
+                />  
+            </View>  
+        );  
+    }  
+}  
+  
+const styles = StyleSheet.create({  
+    container: {  
+        flex: 1,  
+    }, 
+
+    item: {  
+        padding: 10,  
+        fontSize: 24,  
+        height: 80,  
+    },  
+})  
+
 
 
 // ============================================================== //
 
 
 // Example - 2
-// Horizontal ScrollView - The horizontal ScrollView scrolls the components and views from left to right. It will be implemented by setting the props horizontal to true (horizontal={true}).
 
-import React, { Component } from 'react';  
-import { ScrollView, View, Text, Button, StyleSheet, Alert } from 'react-native';  
-  
-export default class ScrolledViewExample extends Component {  
-    onPressButton() {  
-        Alert.alert('You clicked the button!')  
-    }  
-  
-    render() {  
-        return (  
-            <ScrollView  horizontal={true} style={styles.container} contentContainerStyle={styles.scrollViewContainer}>  
-                <Text style={{fontSize:22, padding: 10}}>Horizontal ScrollView</Text>  
-
-                <View style={[{ width: 220,height: 70,padding: 10 }]}>  
-                    <Button  
-                        onPress={this.onPressButton}  
-                        title="Button 1"  
-                        color="#FF3D00"  
-                    />  
-                </View>  
-
-                <Text style={{fontSize:22, padding: 10}}>javatpoint</Text>  
-                <View style={[{ width: 220,height: 70,padding: 10 }]}>  
-                    <Button  
-                        onPress={this.onPressButton}  
-                        title="Button 2"  
-                        color="#3D00FF"  
-                    />  
-                </View>  
-                
-                <Text style={{fontSize:22, padding: 10}}>React Native ScrollView Example</Text>  
-                <View style={[{ width: 220,height: 70,padding: 10 }]}>  
-                    <Button  
-                        onPress={this.onPressButton}  
-                        title="Button 3"  
-                        color="#FFFF3D"  
-                    />  
-                </View>  
-
-                <Text style={{fontSize:22, padding: 10}}>If you like</Text>  
-                <View style={[{ width: 220,height: 70,padding: 10 }]}>  
-                    <Button  
-                        onPress={this.onPressButton}  
-                        title="Button 4"  
-                        color="#FF3DFF"  
-                    />  
-                </View>  
-
-                <Text style={{fontSize:22, padding: 10}}>Scrolling horizontal</Text>  
-                <View style={[{ width: 220,height: 70,padding: 10 }]}>  
-                    <Button  
-                        onPress={this.onPressButton}  
-                        title="Button 5"  
-                        color="#3DFF00"  
-                    />  
-                </View>  
-            </ScrollView>  
-        );  
-    }  
-}  
-
-const styles = StyleSheet.create({  
-    container:{  
-        flex: 1,  
-    }, 
-
-    scrollViewContainer:{
-        alignItems:'center'
-    },
-
-    buttonStyle:{ 
-        height: 50, 
-        width: 70, 
-    }
-})  
-
-// Note - If we want to align item and justifyContent then we have to use contentContainerStyle prop to write these propperty inside this prop.
 
 // ============================================================== //
 
