@@ -1,59 +1,72 @@
-// SectionList --> The React Native SectionList component is a list view component which sets the list of data into broken logical section. The broken data can be implemented using its section header prop renderSectionHeader. To implement the SectionList component, we need to import SectionList from 'react-native' library. The sections prop is used to create the list of title and data values. The renderSectionHeader displays the header section of the list view.
+// Touchables --> Touchable components provide the capability to capture the tapping functionality. The touchables component can be implemented as an alternative of basic button if they are not look right for your app. Using these components you build your own button. Tapping on these components you can display the feedback. The touchables components do not provide any default styling so you will need to do your style for presenting nicely in the app.
 
-// ItemSeparatorComponent prop adds the Separator between the lists of data. Using this prop, call a renderSeparatormethod in which we add a View component as separator.
+/*
+    Types of Touchable Components -
+    There are four touchable components provided by React Native. Selection of this component depends on the kind of feedback you want to provide:
+    > TouchableHighlight : The TouchableHighlight can be used where you would use a button or link on the web. The background of this component becomes dark on pressing it.
 
-// To perform an action on clicking (pressing) the list item, we use a onPress prop. The onPress prop and handle the event in another method getListViewItem.
+    > TouchableNativeFeedback : The TouchableNativeFeedback makes a view to response properly on touch. This component works only for Android operating system. It uses native state drawable to display the touch feedback.
 
+    > TouchableOpacity : The TouchableOpacity wrapper is used to reduce the opacity of button. It allows background to be seen while the user press down. The opacity of button will be controlled by wrapping the children in an Animation.
+
+    > TouchableWithoutFeedback : The TouchableWithoutFeedback is used when the user wants to handle the tap functionality but doesn't want to display any feedback.
+
+    Note : Some time user presses a view and holds it for the set of time. This long press is handled by the function using onLongPress props of any of the above "Touchable" components.
+
+*/
 
 // Example - 1
 import React, { Component } from 'react';  
-import { SectionList, StyleSheet, Text, View, Alert } from 'react-native';  
+import { Alert,Platform,StyleSheet,Text,TouchableHighlight,TouchableOpacity,  
+    TouchableNativeFeedback,TouchableWithoutFeedback, View } from 'react-native';  
   
-export default class SectionListBasics extends Component {  
-
-    renderSeparator = () => {  
-        return (  
-            <View  
-                style={{  
-                    height: 1,  
-                    width: "100%",  
-                    backgroundColor: "#000",  
-                }}  
-            />  
-        );  
-    };  
-    
-    //handling onPress action  
-    getListViewItem = (item: any) => {  
-        Alert.alert(item);  
+export default class Touchables extends Component {  
+    onPressButton() {  
+        Alert.alert('You tapped the button!')  
     }  
-
-
+  
+    onLongPressButton() {  
+        Alert.alert('You long-pressed the button!')  
+    }  
+  
+  
     render() {  
         return (  
             <View style={styles.container}>  
-                <SectionList  
-                    sections={[  
-                        {
-                            title: 'A', 
-                            data: ['ALTERED','ABBY','ACTION U.S.A.','AMUCK','ANGUISH']
-                        }, 
 
-                        {
-                            title: 'B', 
-                            data: ['BEST MEN','BEYOND JUSTICE','BLACK GUNN','BLOOD RANCH','BEASTIES']
-                        }, 
-                         
-                        {
-                            title: 'C', 
-                            data: ['CARTEL', 'CASTLE OF EVIL', 'CHANCE', 'COP GAME', 'CROSS FIRE',]
-                        },  
-                    ]}  
-                    renderItem={({item}) => <Text style={styles.item} onPress={this.getListViewItem.bind(this, item)} >{item}</Text>}  
-                    renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}  
-                    ItemSeparatorComponent={this.renderSeparator}  
+                <TouchableHighlight onPress={this.onPressButton} underlayColor="pink">  
+                    <View style={styles.button}>  
+                        <Text style={styles.buttonText}>TouchableHighlight</Text>  
+                    </View>  
+                </TouchableHighlight>  
 
-                />  
+                <TouchableOpacity onPress={this.onPressButton} activeOpacity={.2}>  
+                    <View style={styles.button}>  
+                        <Text style={styles.buttonText}>TouchableOpacity</Text>  
+                    </View>  
+                </TouchableOpacity>  
+
+                <TouchableNativeFeedback  
+                    onPress={this.onPressButton} background={TouchableNativeFeedback.Ripple('rgba(255, 0, 0, 0.3)', true)} >  
+                    <View style={styles.button}>  
+                        <Text style={styles.buttonText}>TouchableNativeFeedback</Text>  
+                    </View>  
+                </TouchableNativeFeedback>  
+
+                <TouchableWithoutFeedback  
+                    onPress={this.onPressButton}  
+                >  
+                    <View style={styles.button}>  
+                        <Text style={styles.buttonText}>TouchableWithoutFeedback</Text>  
+                    </View>  
+                </TouchableWithoutFeedback> 
+
+                <TouchableHighlight onPress={this.onPressButton} onLongPress={this.onLongPressButton} underlayColor="white">  
+                    <View style={styles.button}>  
+                        <Text style={styles.buttonText}>Touchable with Long Press</Text>  
+                    </View>  
+                </TouchableHighlight>  
+
             </View>  
         );  
     }  
@@ -61,27 +74,23 @@ export default class SectionListBasics extends Component {
   
 const styles = StyleSheet.create({  
     container: {  
-        flex: 1,  
-        backgroundColor: "#5ead97"  
-    },  
-
-    sectionHeader: {  
-        paddingTop: 2,  
-        paddingLeft: 10,  
-        paddingRight: 10,  
-        paddingBottom: 2,  
-        fontSize: 22,  
-        fontWeight: 'bold',  
-        color: "#fff",  
-        backgroundColor: '#8fb1aa',  
+        paddingTop: 60,  
+        alignItems: 'center'  
     }, 
 
-    item: {  
-        padding: 10,  
-        fontSize: 18,  
-        height: 50,  
+    button: {  
+        marginBottom: 30,  
+        width: 270,  
+        alignItems: 'center',  
+        backgroundColor: '#5ead97'  
+    }, 
+
+    buttonText: {  
+        padding: 20,  
+        color: 'white',  
+        fontSize: 18  
     }  
-})  
+});  
 
 
 
